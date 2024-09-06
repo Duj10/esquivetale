@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     bool gameStarted = false;
-    public GameObject os;
+    public GameObject Os;
     public float maxX;
     public Transform spawnPoint;
     public float spawnRate;
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         spawnPos.x = Random.Range(-maxX, maxX);
 
         // Envoie l'objet à la position calculée
-        Instantiate(os, spawnPos, Quaternion.identity);
+        Instantiate(Os, spawnPos, Quaternion.identity);
 
         score++;
         scoreText.text = score.ToString();
