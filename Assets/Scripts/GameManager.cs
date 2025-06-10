@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI bestScore;
 
+    public GameObject shieldBoostPrefab; // Le prefab du boost bouclier
+    public float shieldBoostSpawnRate = 10f; // Fréquence d'apparition en secondes
+
     int score = 0;
     int bestscore = 0;
 
@@ -41,6 +44,7 @@ public class GameManager : MonoBehaviour
     {
         // Appelle la méthode Spawnos
         InvokeRepeating("Spawnos", 0.5f, spawnRate);
+        StartCoroutine(SpawnShieldBoostRandom());
     }
 
     private void Spawnos()
@@ -64,5 +68,22 @@ public class GameManager : MonoBehaviour
             // Enregistre le meilleur score dans PlayerPrefs
             PlayerPrefs.SetInt("bscore", bestscore);
         }
+    }
+
+    private IEnumerator SpawnShieldBoostRandom()
+    {
+        while (true)
+        {
+            float waitTime = Random.Range(5f, 15f); // Choisis ici le min et max en secondes
+            yield return new WaitForSeconds(waitTime);
+            SpawnShieldBoost();
+        }
+    }
+
+    private void SpawnShieldBoost()
+    {
+        Vector3 spawnPos = spawnPoint.position;
+        spawnPos.x = Random.Range(-maxX, maxX);
+        Instantiate(shieldBoostPrefab, spawnPos, Quaternion.identity);
     }
 }

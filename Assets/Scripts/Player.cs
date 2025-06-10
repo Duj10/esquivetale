@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
 {
 
     public float moveSpeed;
+    public float shieldDuration = 1f;
+    private bool shieldActive = false;
+    private float shieldTimer = 0f;
     Rigidbody2D rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,11 +37,29 @@ public class Player : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero;
         }
+
+        if (shieldActive)
+        {
+            shieldTimer -= Time.deltaTime;
+            if (shieldTimer <= 0)
+            {
+                shieldActive = false;
+            }
+        }
     }
+
+    public void ActivateShield(float duration)
+    {
+        shieldActive = true;
+        shieldTimer = duration;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Os")
         {
+            if (shieldActive)
+                return;
             SceneManager.LoadScene(0);
         }
     }
