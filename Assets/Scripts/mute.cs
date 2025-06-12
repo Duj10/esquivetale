@@ -8,21 +8,22 @@ public class PersistentMusic : MonoBehaviour
 
     private void Awake()
     {
-        // Vérifiez s'il y a déjà une instance de PersistentMusic
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (instance != this)
         {
             Destroy(gameObject);
+            return;
         }
-    }
 
-    private void Start()
-    {
-        // Restaurer l'état de la sourdine
+        // Test : force la musique à jouer
+        if (!audioSource.isPlaying)
+            audioSource.Play();
+
+        // Toujours restaurer l'état du mute ici
         if (PlayerPrefs.HasKey("Muted"))
         {
             audioSource.mute = PlayerPrefs.GetInt("Muted") == 1;

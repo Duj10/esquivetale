@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      esquivetale_0: 3081240803116159139
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

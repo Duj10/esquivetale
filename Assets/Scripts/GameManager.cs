@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            float waitTime = Random.Range(5f, 15f); // Choisis ici le min et max en secondes
+            float waitTime = Random.Range(5f, 10f);
             yield return new WaitForSeconds(waitTime);
             SpawnShieldBoost();
         }

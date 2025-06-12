@@ -26,11 +26,11 @@ public class Player : MonoBehaviour
 
             if (touchPos.x < 0)
             {
-                rb.AddForce(Vector2.left * moveSpeed);
+                rb.linearVelocity = Vector2.left * moveSpeed;
             }
             else
             {
-                rb.AddForce(Vector2.right * moveSpeed);
+                rb.linearVelocity = Vector2.right * moveSpeed;
             }
         }
         else
